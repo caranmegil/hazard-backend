@@ -1,0 +1,12 @@
+{
+  "name": "hazard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "William R. Moore",
+  "license": "GPLv3",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-router": "^9.4.0",
+    "koa-validate": "^1.0.7"
+  }
+}
