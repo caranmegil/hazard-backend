@@ -21,7 +21,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 const Koa = require('koa');
 const app = new Koa();
 const router = new require('koa-router')();
-require('koa-validate')(app)
+require('koa2-ctx-validator')(app)
 
 function rollDie(sides) {
   let result = Math.floor(Math.random() * Math.floor(sides)) + 1;
@@ -74,12 +74,12 @@ function roll_chance(main, chance, result) {
 }
 
 router.get('/:main', async (ctx) => {
-  this.checkParams('main').empty().gt(9, 'too high').lt(5, 'too low').toInt();
-  if (this.errors) {
-    this.body = this.errors;
+  ctx.checkParams('main').empty().gt(4, 'too low').lt(9, 'too high').toInt();
+  if (ctx.errors) {
+    ctx.body = {result: -1, errors: ctx.errors};
+  } else {
+    ctx.body = hazard(ctx.params.main)
   }
-
-  this.body = hazard(ctx.params.main)
 });
 
 app.use(router.middleware())
