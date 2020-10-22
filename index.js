@@ -74,7 +74,7 @@ function roll_chance(main, chance, result) {
 }
 
 router.get('/:main', async (ctx) => {
-  ctx.checkParams('main').empty().gt(4, 'too low').lt(9, 'too high').toInt();
+  ctx.checkParams('main').empty().gt(4, 'main is too low').lt(9, 'main is too high').toInt();
   if (ctx.errors) {
     ctx.body = {result: -1, errors: ctx.errors};
   } else {
